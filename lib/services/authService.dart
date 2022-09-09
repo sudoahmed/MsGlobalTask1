@@ -1,9 +1,16 @@
 import 'dart:convert' as convert;
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:ms_global_task1/provider/user_data_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../models/user_data_model.dart';
 
 class AuthService {
-  void authenticate(String userEmail, String userPass) async {
+  Future<bool> authenticate(
+      String userEmail, String userPass, BuildContext context) async {
+    final userData = Provider.of<UserDataProvider>(context, listen: false);
     var response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
 
@@ -14,15 +21,26 @@ class AuthService {
       var decoded = convert.jsonDecode(response.body);
       //print(decoded);
       //TODO: Work on the Login Logic
-      for (var i = 1; i < 10; i++) {
-        if (decoded[i]['email'] == userEmail && decoded[i]['username']) {
-          print('Login Success');
+      for (var i = 0; i < 10; i++) {
+        if (userEmail == decoded[i]['email'] &&
+            userPass == decoded[i]['username']) {
+          //print('Login Success');
+          // UserDataModel().setName = decoded[i]['userId'];
+          print(decoded[i]['email']);
+          print(decoded[i]['username']);
+
+          print(decoded[i]['id']);
+          userData.setID(decoded[i]['id']);
+          return true;
         }
         // print(decoded[i]['email']);
         // print(decoded[i]['username']);
       }
+      //print('Login Failed');
+      return false;
     } else {
-      print('error');
+      //print('error');
+      return false;
     }
   }
 }

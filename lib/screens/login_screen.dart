@@ -4,6 +4,8 @@ import 'package:ms_global_task1/components/custom_textfield.dart';
 import 'package:ms_global_task1/constants/color_constants.dart';
 import 'package:ms_global_task1/services/authService.dart';
 
+import '../services/postFetchService.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -66,9 +68,42 @@ class _LoginScreenState extends State<LoginScreen> {
               buttonText: 'Login',
               buttonColor: kDefaultButtonColor,
               desiredWidth: 250,
-              buttonFunction: () {
-                AuthService()
-                    .authenticate(emailController.text, passController.text);
+              buttonFunction: () async {
+                if (await AuthService().authenticate(
+                    emailController.text, passController.text, context)) {
+                  print('Login Success');
+                  await PostFetchService().fetchPosts(context);
+                  Navigator.pushNamed(context, '/posts');
+                } else {
+                  print('Login Failed');
+                  return showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Login Failed'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: const <Widget>[
+                              Text(
+                                  'You have entered invalid email or password.'),
+                              Text(
+                                  'Please enter email and password correctly!'),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
                 // print(emailController.text);
                 // print(passController.text);
               },
