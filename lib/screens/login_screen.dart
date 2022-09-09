@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ms_global_task1/components/custom_button.dart';
 import 'package:ms_global_task1/components/custom_textfield.dart';
 import 'package:ms_global_task1/constants/color_constants.dart';
+import 'package:ms_global_task1/services/authService.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -66,8 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
               buttonColor: kDefaultButtonColor,
               desiredWidth: 250,
               buttonFunction: () {
-                print(emailController.text);
-                print(passController.text);
+                AuthService()
+                    .authenticate(emailController.text, passController.text);
+                // print(emailController.text);
+                // print(passController.text);
               },
             )
           ],
