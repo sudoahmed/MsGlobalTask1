@@ -12,6 +12,8 @@ class CustomTextField extends StatelessWidget {
     this.customFontSize,
     this.customColor,
     this.textDeco,
+    required this.textController,
+    this.onChangeFunction,
   }) : super(key: key);
 
   final String hintText;
@@ -22,6 +24,8 @@ class CustomTextField extends StatelessWidget {
   final double? customFontSize;
   final Color? customColor;
   final TextDecoration? textDeco;
+  final TextEditingController textController;
+  final Function(String)? onChangeFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,7 @@ class CustomTextField extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       height: 50,
       child: TextField(
+        onChanged: onChangeFunction,
         obscureText: passwordField ?? false,
         keyboardType: keyboard,
         style: const TextStyle(color: kDefaultButtonColor),

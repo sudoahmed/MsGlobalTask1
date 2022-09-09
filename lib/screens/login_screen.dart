@@ -12,6 +12,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _showPass = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
@@ -27,8 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(
               width: _width * 0.9,
-              child: const CustomTextField(
-                  hintText: 'Email', hintTextColor: Colors.grey),
+              child: CustomTextField(
+                hintText: 'Email',
+                hintTextColor: Colors.grey,
+                textController: emailController,
+                onChangeFunction: (value) {
+                  emailController.text = value;
+                },
+              ),
             ),
             SizedBox(
               width: _width * 0.9,
@@ -36,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: 'Password',
                 passwordField: _showPass,
                 hintTextColor: Colors.grey,
+                textController: passController,
                 suffixIcon: InkWell(
                   child: const Icon(
                     Icons.visibility,
@@ -47,13 +56,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   },
                 ),
+                onChangeFunction: (value) {
+                  passController.text = value;
+                },
               ),
             ),
             CustomButton(
-                buttonText: 'Login',
-                buttonColor: kDefaultButtonColor,
-                buttonFunction: () {},
-                desiredWidth: 250)
+              buttonText: 'Login',
+              buttonColor: kDefaultButtonColor,
+              desiredWidth: 250,
+              buttonFunction: () {
+                print(emailController.text);
+                print(passController.text);
+              },
+            )
           ],
         ),
       )),
