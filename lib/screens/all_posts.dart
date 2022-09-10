@@ -31,13 +31,13 @@ class _AllPostsScreensState extends State<AllPostsScreens>
     final userData = Provider.of<UserDataProvider>(context);
     final jsonData = Provider.of<JsonDataProvider>(context);
     return Scaffold(
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         elevation: 10.0,
-        title: Text('Lorem Ipsum'),
+        title: const Text('Lorem Ipsum'),
         actions: [
           InkWell(
-            child: Icon(Icons.search),
+            child: const Icon(Icons.search),
             onTap: () {
               print(userData.userID);
               print(jsonData.decode[45]['id']);
@@ -66,10 +66,82 @@ class _AllPostsScreensState extends State<AllPostsScreens>
             );
           },
         ),
-        Center(
-          child: Text('Profile'),
+        SingleChildScrollView(
+          child: Column(children: [
+            ProfileInfoRow(
+              field: 'Name',
+              data: userData.name,
+            ),
+            const Divider(
+              color: Colors.black12,
+              height: 22,
+              thickness: 2,
+            ),
+            ProfileInfoRow(
+              field: 'User',
+              data: userData.user,
+            ),
+            const Divider(
+              color: Colors.black12,
+              height: 22,
+              thickness: 2,
+            ),
+            ProfileInfoRow(
+              field: 'Address',
+              data: userData.address,
+            ),
+            const Divider(
+              color: Colors.black12,
+              height: 22,
+              thickness: 2,
+            ),
+            ProfileInfoRow(
+              field: 'Zip code',
+              data: userData.zip,
+            ),
+            const Divider(
+              color: Colors.black12,
+              height: 22,
+              thickness: 2,
+            ),
+          ]),
         ),
       ]),
+    );
+  }
+}
+
+class ProfileInfoRow extends StatelessWidget {
+  const ProfileInfoRow({
+    Key? key,
+    required this.field,
+    required this.data,
+  }) : super(key: key);
+  final String field;
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            field,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            data,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

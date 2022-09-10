@@ -16,8 +16,6 @@ class AuthService {
 
     if (response.statusCode == 200) {
       print(response.statusCode);
-      //print(response.body);
-      var responseBody = response.body;
       var decoded = convert.jsonDecode(response.body);
       //print(decoded);
       //TODO: Work on the Login Logic
@@ -26,11 +24,17 @@ class AuthService {
             userPass == decoded[i]['username']) {
           //print('Login Success');
           // UserDataModel().setName = decoded[i]['userId'];
-          print(decoded[i]['email']);
-          print(decoded[i]['username']);
-
-          print(decoded[i]['id']);
+          // print(decoded[i]['email']);
+          // print(decoded[i]['username']);
+          //
+          // print(decoded[i]['id']);
           userData.setID(decoded[i]['id']);
+          userData.setName(decoded[i]['name']);
+          userData.setUser(decoded[i]['username']);
+          userData.setAddress(
+              "${decoded[i]['address']['street']}, ${decoded[i]['address']['suite']},\n ${decoded[i]['address']['city']}");
+          userData.setZip(decoded[i]['address']['zipcode']);
+
           return true;
         }
         // print(decoded[i]['email']);

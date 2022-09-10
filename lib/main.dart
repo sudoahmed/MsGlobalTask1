@@ -8,8 +8,9 @@ import 'package:ms_global_task1/screens/splash_screen.dart';
 import 'package:ms_global_task1/services/postFetchService.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Provider.debugCheckInvalidValueType = null;
   runApp(const MyApp());
 }
 

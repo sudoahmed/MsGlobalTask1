@@ -19,7 +19,7 @@ class PostFetchService {
 
     if (response.statusCode == 200) {
       jsonData.setDecode(convert.jsonDecode(response.body));
-      print(response.body);
+      // print(response.body);
     } else {
       print(response.statusCode);
     }
