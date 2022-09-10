@@ -3,7 +3,9 @@ import 'package:ms_global_task1/components/custom_button.dart';
 import 'package:ms_global_task1/components/custom_textfield.dart';
 import 'package:ms_global_task1/constants/color_constants.dart';
 import 'package:ms_global_task1/services/authService.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/json_data_provider.dart';
 import '../services/postFetchService.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final jsonData = Provider.of<JsonDataProvider>(context);
     final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(

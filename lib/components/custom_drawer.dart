@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ms_global_task1/constants/color_constants.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -16,13 +17,22 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
+            decoration: BoxDecoration(color: kDefaultButtonColor),
+            child: Center(
+              child: Text(
+                'Lorem Ipsum',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.white),
+              ),
             ),
-            child: Text('Drawer Header'),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text(
+              'Item 1',
+              style: TextStyle(fontSize: 15),
+            ),
             onTap: () {
               // Update the state of the app
               // ...
@@ -31,7 +41,46 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Item 2'),
+            title: const Text(
+              'Item 2',
+              style: TextStyle(fontSize: 15),
+            ),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Item 3',
+              style: TextStyle(fontSize: 15),
+            ),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Item 4',
+              style: TextStyle(fontSize: 15),
+            ),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Item 5',
+              style: TextStyle(fontSize: 15),
+            ),
             onTap: () {
               // Update the state of the app
               // ...
